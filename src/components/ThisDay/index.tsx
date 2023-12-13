@@ -9,7 +9,7 @@ const ThisDay = () => {
   const { id } = useParams();
 
   const { data, isLoading } = useWeather(id ? `${id}` : 'seoul');
-  console.log(data);
+
   const temperature = Math.round(data?.main.temp || 0);
   const cityName = data?.name;
 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { HeaderWrapper, Logo } from './styles';
 import CitySelect from './CitySelect';
+import { HeaderWrapper, Logo } from './styles';
 
 const Header = () => {
   return (

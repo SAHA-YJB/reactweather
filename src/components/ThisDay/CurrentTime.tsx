@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTime } from '../../utils/useTime';
 
 const options: Intl.DateTimeFormatOptions = {

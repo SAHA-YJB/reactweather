@@ -1,7 +1,14 @@
-import React from 'react';
+import getWeatherIcon, { IWeatherIcon } from '../../utils/getWeatherIcon';
+import { StyledWeatherIcon } from './styles';
 
-const WeatherIcon = () => {
-  return <div>WeatherIcon</div>;
+interface WeatherIconProps extends React.HTMLAttributes<HTMLImageElement> {
+  icon: IWeatherIcon;
+}
+
+const WeatherIcon: React.FC<WeatherIconProps> = ({ icon, ...props }) => {
+  const iconSrc = `./images/weatherIcons/${getWeatherIcon(icon)}`;
+
+  return <StyledWeatherIcon src={iconSrc} alt='' {...props} />;
 };
 
 export default WeatherIcon;

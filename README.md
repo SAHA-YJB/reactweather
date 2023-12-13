@@ -1,46 +1,39 @@
-# Getting Started with Create React App
+# React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- TypeScript, tanstack/react-query, react-router-dom (type module), styled-components (type module)
 
-## Available Scripts
+## 구현 내용
 
-In the project directory, you can run:
+### 1. 동적 라우팅 설정
 
-### `npm start`
+- 원 페이지 형식의 셀렉트 밸류에 따라 동적 라우팅을 설정.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 2. 탠스택 쿼리/리액트 쿼리-데브툴스 설정
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- 데이터 패칭 및 상태 관리를 위해 tanstack/react-query 라이브러리를 사용하였고, 디버깅을 위해 react-query-devtools를 설정
 
-### `npm test`
+## 날씨 관련 데이터 처리
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 3. 날씨 데이터 패칭 함수 정의
 
-### `npm run build`
+- OpenWeatherMap API를 사용하여 날씨 데이터를 패칭하는 함수를 정의. params로 아이디를 추출하여 API에 매개변수로 전달
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 4. 현재 시간 포맷팅
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 현재 시간을 포맷팅하는 함수를 정의. Intl.DateTimeFormat을 사용하여 시간을 '시:분' 형식으로 출력
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```typescript
+const options: Intl.DateTimeFormatOptions = {
+  hour: 'numeric',
+  minute: 'numeric',
+};
+const time = new Intl.DateTimeFormat('ko-KR', options).format(currentTime);
+```
 
-### `npm run eject`
+### 5. 주간 날씨 데이터 패칭 함수 정의
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- 주간 날씨 데이터를 패칭하는 함수를 정의
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 6. useMemo를 이용한 최적화
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- forEach문을 사용하여 연산을 수행하는 부분에 useMemo를 적용하여 최적화. 데이터에 변화가 없을 때는 메모이제이션 된 값을 사용하여 성능을 향상
